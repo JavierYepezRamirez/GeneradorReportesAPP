@@ -1,0 +1,18 @@
+<!-- res/drawable/boton_redondeado.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <solid android:color="@color/letraPrincipal" />
+
+    <corners android:radius="24dp" />
+
+    <padding
+        android:left="2dp"
+        android:top="2dp"
+        android:right="2dp"
+        android:bottom="2dp" />
+
+    <stroke
+        android:width="2dp"
+        android:color="#00FFFFFF" />
+</shape>
