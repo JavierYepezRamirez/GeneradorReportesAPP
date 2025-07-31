@@ -47,13 +47,20 @@ class Inicio : AppCompatActivity() {
                     }
                     if (exit) {
                         Toast.makeText(this@Inicio, "Login exitoso", Toast.LENGTH_SHORT).show()
+                        etUsuario.text.clear()
+                        etContrasena.text.clear()
                         goToMain()
                     } else {
                         Toast.makeText(this@Inicio, "Usuario o Contraseña Incorrecto", Toast.LENGTH_SHORT).show()
+                        etUsuario.text.clear()
+                        etContrasena.text.clear()
+
                     }
                  } catch (e: Exception){
                     Toast.makeText(this@Inicio, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
-                 }
+                    etUsuario.text.clear()
+                    etContrasena.text.clear()
+                }
             }
         }
     }

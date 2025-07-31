@@ -3,7 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -15,6 +18,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ReportesCINERGIA"
         tools:targetApi="31">
+        <activity
+            android:name=".fotos.fotoDosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".fotos.fotosUnoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".datos.datosActivity"
+            android:exported="false" />
         <activity
             android:name=".Generador.ReporteActivity"
             android:exported="false" />

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Inicio"
-    android:background="@drawable/d3">
+    android:background="@drawable/d2">
 
     <ImageView
         android:id="@+id/ivLogo"
@@ -49,7 +49,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvLogin"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_margin="32dp"
         android:elevation="8dp"
@@ -57,8 +57,9 @@
         app:cardBackgroundColor="@color/letraPrincipal"
         app:cardCornerRadius="16dp"
         app:layout_constraintBottom_toTopOf="@+id/btnGoToMain"
-        app:layout_constraintTop_toBottomOf="@+id/tvBienvenido2"
-        tools:layout_editor_absoluteX="32dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvBienvenido2">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -69,24 +70,26 @@
 
             <EditText
                 android:id="@+id/EtUsuario"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:background="@color/white"
+                android:background="@drawable/boton_redondeado2"
                 android:hint="Usuario"
                 android:inputType="textPersonName"
                 android:padding="12dp"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textAlignment="center"/>
 
             <EditText
                 android:id="@+id/EtContraseña"
-                android:layout_width="match_parent"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:background="@drawable/boton_redondeado2"
                 android:hint="Contraseña"
                 android:inputType="textPassword"
                 android:padding="12dp"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textAlignment="center"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -103,6 +106,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBienvenido2" />
+        app:layout_constraintTop_toBottomOf="@+id/tvBienvenido2"
+        android:layout_marginTop="30dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

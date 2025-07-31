@@ -2,6 +2,7 @@ package com.cinergia.cinercia.service
 
 import android.app.DownloadManager
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import com.cinergia.cinercia.Nodo
 import okhttp3.OkHttpClient
@@ -66,6 +67,7 @@ object AuthService {
         }
     }
 
+
     @RequiresApi(Build.VERSION_CODES.O)
     @Throws(IOException::class)
     fun getNodos(): List<Nodo> {
@@ -93,8 +95,8 @@ object AuthService {
                 ?: throw IOException("Respuesta vacía del servidor")
 
             val listType = object : TypeToken<List<Nodo>>() {}.type
+            Log.d("getNodos", "Respuesta JSON: $body")
             return gson.fromJson(body, listType)
         }
     }
-
 }

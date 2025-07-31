@@ -48,13 +48,14 @@
             app:layout_constraintStart_toStartOf="parent"
             android:queryHint="Buscar Nodo por nombre..."
             app:layout_constraintTop_toBottomOf="@+id/tvTitulo"
-            android:background="@drawable/boton_redondeado2">
+            android:background="@drawable/boton_redondeado2"
+            android:layout_marginVertical="10dp">
         </SearchView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvNodos"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             app:layout_constraintTop_toBottomOf="@id/searchView"
             app:layout_constraintStart_toStartOf="parent"

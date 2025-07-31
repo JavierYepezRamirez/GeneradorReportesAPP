@@ -1,22 +1,25 @@
 package com.cinergia.cinercia
 
+import com.google.gson.annotations.SerializedName
 
 data class Nodo(
     val id: String,
-    val description: DescipcionNodo
+
+    @SerializedName("descripcion")
+    val descripcion: Descripcion
 )
 
-data class DescipcionNodo (
+data class Descripcion(
     val nombre: String,
-    val nomenclatura: String,
-    val tipo: String,
-    val comunidad: String,
     val municipio: String,
-    val longitud: String,
-    val latitud: String,
-    val claveNodo: String,
-    val direccion: String,
-    val codigoPostal: String,
-    val telefono: String,
-    val correo: String
+    val comunidad: String? = null,
+    val direccion: String? = null,
+    val tipo: String? = null,
+    val latitud: String? = null,
+    val longitud: String? = null,
+    val telefono: String? = null,
+    val correo: String? = null,
+    val claveNodo: String? = null,
+    val codigoPostal: String? = null,
+    val nomenclatura: String? = null
 )
