@@ -159,7 +159,7 @@ class MainReportes : AppCompatActivity() {
         }
 
         btnActividades.setOnClickListener {
-            // Aquí va tu lógica de actividades si la tienes
+            // TODO vista de las Actividades
         }
 
         btnAceptar.setOnClickListener {
