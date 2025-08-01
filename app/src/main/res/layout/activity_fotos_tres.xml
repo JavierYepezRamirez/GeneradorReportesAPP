@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fotos.fotoDosActivity"
+    tools:context=".fotos.fotosTresActivity"
     android:background="@drawable/d2">
 
     <TextView
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:fontFamily="@font/adlam_display"
-        android:text="Foto 2"
+        android:text="Foto 3"
         android:textColor="@color/letraPrincipal"
         android:textSize="23dp"
         android:textStyle="bold"
@@ -23,18 +23,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnTomarFoto2"
+        android:id="@+id/btnTomarFoto3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:background="@drawable/boton_redondeado2"
         android:text="Tomar Foto"
-        app:layout_constraintEnd_toStartOf="@+id/btnSeleccionarFotos2"
+        app:layout_constraintEnd_toStartOf="@+id/btnSeleccionarFotos3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitulo" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTitulo"/>
 
     <Button
-        android:id="@+id/btnSeleccionarFotos2"
+        android:id="@+id/btnSeleccionarFotos3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Seleccionar Fotos"
@@ -51,12 +51,12 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnTomarFoto2"
+        app:layout_constraintTop_toBottomOf="@+id/btnTomarFoto3"
         android:background="@drawable/boton_redondeado2"/>
 
 
     <Button
-        android:id="@+id/btnEnviarFotos2"
+        android:id="@+id/btnEnviarFotos3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Enviar Fotos"

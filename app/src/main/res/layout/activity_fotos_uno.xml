@@ -26,12 +26,34 @@
         android:id="@+id/btnTomarFoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/boton_redondeado2"
         android:text="Tomar Foto"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnSeleccionarFotos"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitulo" />
+
+    <Button
+        android:id="@+id/btnSeleccionarFotos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seleccionar Fotos"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitulo"
         android:background="@drawable/boton_redondeado2"
         android:layout_margin="20dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginHorizontal="20dp"
+        android:id="@+id/recyclerFotos"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnTomarFoto"
+        android:background="@drawable/boton_redondeado2"/>
+
 
     <Button
         android:id="@+id/btnEnviarFotos"
@@ -40,10 +62,9 @@
         android:text="Enviar Fotos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnTomarFoto"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerFotos"
         android:background="@drawable/boton_redondeado2"
         android:layout_margin="20dp"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

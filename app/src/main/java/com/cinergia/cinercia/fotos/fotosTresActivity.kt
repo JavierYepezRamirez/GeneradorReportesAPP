@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -18,14 +19,14 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cinergia.cinercia.R
+import com.cinergia.cinercia.actividades.actividadesActivity
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class fotoDosActivity : AppCompatActivity() {
-    private val fotosRecibidas1 = mutableListOf<Uri>()
 
+class fotosTresActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: FotoAdapter
     private lateinit var fotoUri: Uri
@@ -33,16 +34,16 @@ class fotoDosActivity : AppCompatActivity() {
     private val REQUEST_SELECT_IMAGES = 2
     private val PERMISSION_REQUEST_CODE = 100
     private val fotosTomadas = mutableListOf<Uri>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_foto_dos)
+        setContentView(R.layout.activity_fotos_tres)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         val nodoId = intent.getStringExtra("nodoId")
         val nodoNombre = intent.getStringExtra("nodoNombre")
         val nodoMunicipio = intent.getStringExtra("nodoMunicipio")
@@ -68,15 +69,17 @@ class fotoDosActivity : AppCompatActivity() {
         val fechaLlegada = intent.getStringExtra("fechaLlegada")
         val fechaCierre = intent.getStringExtra("fechaCierre")
 
-        val uris = intent.getParcelableArrayListExtra<Uri>("fotos")
-        if (uris != null) {
-            fotosRecibidas1.addAll(uris)
-        }
+        val fotosRecibidas1: ArrayList<Uri>? = intent.getParcelableArrayListExtra("fotos_recibidas")
+        val fotosTomadas2: ArrayList<Uri>? = intent.getParcelableArrayListExtra("fotos_tomadas")
 
+        val todasLasFotos = mutableListOf<Uri>()
 
-        val btnTomarFoto = findViewById<Button>(R.id.btnTomarFoto2)
-        val btnEnviar = findViewById<Button>(R.id.btnEnviarFotos2)
-        val btnSeleccionar = findViewById<Button>(R.id.btnSeleccionarFotos2)
+        fotosRecibidas1?.let { todasLasFotos.addAll(it) }
+        fotosTomadas2?.let { todasLasFotos.addAll(it) }
+
+        val btnTomarFoto = findViewById<Button>(R.id.btnTomarFoto3)
+        val btnEnviar = findViewById<Button>(R.id.btnEnviarFotos3)
+        val btnSeleccionar = findViewById<Button>(R.id.btnSeleccionarFotos3)
 
         recyclerView = findViewById(R.id.recyclerFotos)
         adapter = FotoAdapter(fotosTomadas)
@@ -108,9 +111,14 @@ class fotoDosActivity : AppCompatActivity() {
         }
 
         btnEnviar.setOnClickListener {
-            val intent = Intent(this, fotosTresActivity::class.java).apply {
-                putParcelableArrayListExtra("fotos_recibidas", ArrayList(fotosRecibidas1))
-                putParcelableArrayListExtra("fotos_tomadas", ArrayList(fotosTomadas))
+            val todasLasFotos = mutableListOf<Uri>()
+
+            fotosRecibidas1?.let { todasLasFotos.addAll(it) }
+            fotosTomadas2?.let { todasLasFotos.addAll(it) }
+            todasLasFotos.addAll(fotosTomadas)
+
+            val intent = Intent(this, actividadesActivity::class.java).apply {
+                intent.putParcelableArrayListExtra("fotos_totales", ArrayList(todasLasFotos))
 
                 putExtra("nodoId", nodoId)
                 putExtra("nodoNombre", nodoNombre)
@@ -136,7 +144,6 @@ class fotoDosActivity : AppCompatActivity() {
                 putExtra("fechaApertura", fechaApertura)
                 putExtra("fechaLlegada", fechaLlegada)
                 putExtra("fechaCierre", fechaCierre)
-
             }
             startActivity(intent)
         }
@@ -210,6 +217,21 @@ class fotoDosActivity : AppCompatActivity() {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                if (permissions.contains(android.Manifest.permission.CAMERA)) {
+                    tomarFoto()
+                } else if (permissions.contains(android.Manifest.permission.READ_EXTERNAL_STORAGE) || permissions.contains(android.Manifest.permission.READ_MEDIA_IMAGES)) {
+                    seleccionarFotosGaleria()
+                }
+            } else {
+                Toast.makeText(this, "Se requiere permiso para continuar", Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -4,7 +4,7 @@
 
     <solid android:color="@color/letraPrincipal" />
 
-    <corners android:radius="24dp" />
+    <corners android:radius="16dp" />
 
     <padding
         android:left="2dp"

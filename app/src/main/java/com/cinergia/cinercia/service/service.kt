@@ -99,4 +99,30 @@ object AuthService {
             return gson.fromJson(body, listType)
         }
     }
+
+    fun getActividades(): List<String> {
+        val url = "https://generadorreportes-dae9e-default-rtdb.firebaseio.com/.json"
+
+        val request = Request.Builder()
+            .url(url)
+            .get()
+            .build()
+
+        client.newCall(request).execute().use { response ->
+            if (!response.isSuccessful) {
+                throw IOException("Error al obtener actividades: ${response.body?.string()}")
+            }
+
+            val responseBody = response.body?.string()
+                ?: throw IOException("Respuesta vacía del servidor")
+
+            Log.d("ResponseBody", responseBody)
+
+            val listType = object : TypeToken<List<String>>() {}.type
+            val actividadesList: List<String> = gson.fromJson(responseBody, listType)
+                ?: throw IOException("No se pudo parsear actividades")
+
+            return actividadesList
+        }
+    }
 }
