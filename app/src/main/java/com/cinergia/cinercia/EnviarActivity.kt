@@ -20,6 +20,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.InputStream
+import java.util.concurrent.TimeUnit
 import kotlin.system.exitProcess
 
 private lateinit var progressBar: ProgressBar
@@ -160,7 +161,12 @@ class EnviarActivity : AppCompatActivity() {
         ) {
         val url = "https://model-malamute-real.ngrok-free.app/reportes"
 
-        val client = OkHttpClient()
+        val client = OkHttpClient.Builder()
+            .connectTimeout(24, TimeUnit.HOURS)
+            .writeTimeout(24, TimeUnit.HOURS)
+            .readTimeout(24, TimeUnit.HOURS)
+            .build()
+
         val gson = Gson()
 
         val builder = MultipartBody.Builder().setType(MultipartBody.FORM)
@@ -242,5 +248,6 @@ class EnviarActivity : AppCompatActivity() {
                 }
             }
         }.start()
+
     }
 }

@@ -118,7 +118,7 @@ class fotosTresActivity : AppCompatActivity() {
             todasLasFotos.addAll(fotosTomadas)
 
             val intent = Intent(this, actividadesActivity::class.java).apply {
-                intent.putParcelableArrayListExtra("fotos_totales", ArrayList(todasLasFotos))
+                putParcelableArrayListExtra("fotos_totales", ArrayList(todasLasFotos))
 
                 putExtra("nodoId", nodoId)
                 putExtra("nodoNombre", nodoNombre)
