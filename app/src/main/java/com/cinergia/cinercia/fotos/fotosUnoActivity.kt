@@ -222,28 +222,3 @@ class fotosUnoActivity : AppCompatActivity() {
         }
     }
 }
-
-//val nodoId = intent.getStringExtra("nodoId")
-//val nodoNombre = intent.getStringExtra("nodoNombre")
-//val nodoMunicipio = intent.getStringExtra("nodoMunicipio")
-//val nodoComunidad = intent.getStringExtra("nodoComunidad")
-//val nodoDireccion = intent.getStringExtra("nodoDireccion")
-//val nodoTipo = intent.getStringExtra("nodoTipo")
-//val nodoLatitud = intent.getStringExtra("nodoLatitud")
-//val nodoLongitud = intent.getStringExtra("nodoLongitud")
-//val nodoTelefono = intent.getStringExtra("nodoTelefono")
-//val nodoCorreo = intent.getStringExtra("nodoCorreo")
-//val nodoClaveNodo = intent.getStringExtra("nodoClaveNodo")
-//val nodoCodigoPostal = intent.getStringExtra("nodoCodigoPostal")
-//val nodoNomenclatura = intent.getStringExtra("nodoNomenclatura")
-//
-//val empleado = intent.getStringExtra("empleado")
-//val area = intent.getStringExtra("area")
-//val entidad = intent.getStringExtra("entidad")
-//val servicio = intent.getStringExtra("servicio")
-//val mantenimineto = intent.getStringExtra("mantenimiento")
-//val hora = intent.getStringExtra("hora")
-//val fechaEmision = intent.getStringExtra("fechaEmision")
-//val fechaApertura = intent.getStringExtra("fechaApertura")
-//val fechaLlegada = intent.getStringExtra("fechaLlegada")
-//val fechaCierre = intent.getStringExtra("fechaCierre")

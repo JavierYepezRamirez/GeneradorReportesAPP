@@ -1,8 +1,8 @@
 package com.cinergia.cinercia
 
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -20,6 +20,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.InputStream
+import kotlin.system.exitProcess
 
 private lateinit var progressBar: ProgressBar
 private lateinit var statusIcon: ImageView
@@ -38,6 +39,10 @@ class EnviarActivity : AppCompatActivity() {
         val actividadesSeleccionadas = intent.getStringArrayListExtra("actividades_seleccionadas")
 
         val fotosTotales = intent.getParcelableArrayListExtra<Uri>("fotos_totales")
+        Log.d("DebugEnviar", "Actividades: $actividadesSeleccionadas")
+        Log.d("DebugEnviar", "Fotos: $fotosTotales")
+
+
 
         val nodoId = intent.getStringExtra("nodoId")
         val nodoNombre = intent.getStringExtra("nodoNombre")
@@ -77,11 +82,9 @@ class EnviarActivity : AppCompatActivity() {
             builder.setTitle("Confirmar finalización")
             builder.setMessage("¿Estás seguro de que deseas finalizar?")
             builder.setPositiveButton("Sí") { dialog, _ ->
-
-                val intent = Intent(this,MainReportes::class.java)
-                startActivity(intent)
-                finish()
                 dialog.dismiss()
+                finishAffinity()
+                exitProcess(0)
             }
             builder.setNegativeButton("No") { dialog, _ ->
                 dialog.dismiss()
@@ -90,6 +93,7 @@ class EnviarActivity : AppCompatActivity() {
             val dialog = builder.create()
             dialog.show()
         }
+
 
 
         btnEnviarServidor.setOnClickListener {
@@ -154,7 +158,7 @@ class EnviarActivity : AppCompatActivity() {
         reporteEstus: String?,
 
         ) {
-        val url = "https://model-malamute-real.ngrok-free.app/tu_endpoint"
+        val url = "https://model-malamute-real.ngrok-free.app/reportes"
 
         val client = OkHttpClient()
         val gson = Gson()
@@ -192,20 +196,23 @@ class EnviarActivity : AppCompatActivity() {
         fechaCierre?.let { builder.addFormDataPart("fechaCierre", it) }
         reporteEstus?.let {builder.addFormDataPart("reporteEstus", it)}
 
+        fotosTotales?.forEach { uri ->
+            Log.d("FotosEnviadas", "Uri: $uri")
+        }
+
         fotosTotales?.forEachIndexed { index, uri ->
-            val inputStream: InputStream? = contentResolver.openInputStream(uri)
+            val inputStream = contentResolver.openInputStream(uri)
             val bytes = inputStream?.readBytes()
             inputStream?.close()
-
             if (bytes != null) {
-                val requestFile = bytes.toRequestBody("image/jpeg".toMediaTypeOrNull())
-                builder.addFormDataPart(
-                    "foto$index",
-                    "foto$index.jpg",
-                    requestFile
-                )
+                val mimeType = contentResolver.getType(uri) ?: "image/jpeg"
+                val requestFile = bytes.toRequestBody(mimeType.toMediaTypeOrNull())
+                builder.addFormDataPart("fotos", "foto$index.jpg", requestFile)
             }
         }
+
+        Log.d("DebugEnviar", "Actividades seleccionadas JSON: ${gson.toJson(actividadesSeleccionadas)}")
+        Log.d("DebugEnviar", "Fotos totales cantidad: ${fotosTotales?.size ?: 0}")
         val requestBody = builder.build()
 
         val request = Request.Builder()
@@ -220,8 +227,10 @@ class EnviarActivity : AppCompatActivity() {
                     progressBar.visibility = View.GONE
                     statusIcon.visibility = View.VISIBLE
                     if (response.isSuccessful) {
+                        Log.e("RespuestaServidor", "Código: ${response.code}")
                         statusIcon.setImageResource(R.drawable.ic_check)
                     } else {
+                        Log.e("RespuestaServidor", "Body: ${response.body?.string()}")
                         statusIcon.setImageResource(R.drawable.ic_close)
                     }
                 }

@@ -220,21 +220,21 @@ class datosActivity : AppCompatActivity() {
             datePickerDialog.show()
         }
 
-        // Valores
-        val empleado = sEmpleado.selectedItem.toString()
-        val area = sArea.selectedItem.toString()
-        val Entidad = sEntidad.selectedItem.toString()
-        val Servicio = sServicio.selectedItem.toString()
-        val mantenimiento = sMantenimiento.selectedItem.toString()
-
-        val hora = tvHora.text.toString()
-        val fechaEmision = tvFechaEmision.text.toString()
-        val fechaApertura = tvFechaApertura.text.toString()
-        val fechaLlegada = tvFechaLlegada.text.toString()
-        val fechaCierre = tvFechaCierre.text.toString()
-
 
         btnGoToFotos1.setOnClickListener {
+            // Valores
+            val empleado = sEmpleado.selectedItem.toString()
+            val area = sArea.selectedItem.toString()
+            val Entidad = sEntidad.selectedItem.toString()
+            val Servicio = sServicio.selectedItem.toString()
+            val mantenimiento = sMantenimiento.selectedItem.toString()
+
+            val hora = tvHora.text.toString()
+            val fechaEmision = tvFechaEmision.text.toString()
+            val fechaApertura = tvFechaApertura.text.toString()
+            val fechaLlegada = tvFechaLlegada.text.toString()
+            val fechaCierre = tvFechaCierre.text.toString()
+
             if (empleado.isEmpty() || area.isEmpty() || Entidad.isEmpty() || Servicio.isEmpty() ||
                 mantenimiento.isEmpty() || hora.isEmpty() || fechaEmision.isEmpty() ||
                 fechaApertura.isEmpty() || fechaLlegada.isEmpty() || fechaCierre.isEmpty()) {
@@ -292,6 +292,4 @@ class datosActivity : AppCompatActivity() {
                 .show()
         }
     }
-
-
 }

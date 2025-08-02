@@ -62,10 +62,7 @@ class actividadesActivity : AppCompatActivity() {
 
         btnEnvar.setOnClickListener {
             val intent = Intent(this, EnviarActivity::class.java).apply {
-                intent.putStringArrayListExtra(
-                    "actividades_seleccionadas",
-                    ArrayList(actividadesSeleccionadas)
-                )
+                putStringArrayListExtra("actividades_seleccionadas", ArrayList(actividadesSeleccionadas))
                 fotosTotales?.let {
                     putParcelableArrayListExtra("fotos_totales", it)
                 }
@@ -93,10 +90,9 @@ class actividadesActivity : AppCompatActivity() {
                 putExtra("fechaApertura", fechaApertura)
                 putExtra("fechaLlegada", fechaLlegada)
                 putExtra("fechaCierre", fechaCierre)
-
-
             }
             startActivity(intent)
+
         }
 
         Thread {
