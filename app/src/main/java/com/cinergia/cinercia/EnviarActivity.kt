@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
-import android.widget.Toast
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +19,6 @@ import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
-import java.io.InputStream
 import kotlin.system.exitProcess
 
 private lateinit var progressBar: ProgressBar
@@ -77,6 +76,8 @@ class EnviarActivity : AppCompatActivity() {
         val btnEnviarServidor = findViewById<Button>(R.id.btnGenerarReporte)
         val btnFinal = findViewById<Button>(R.id.btnFinalizar)
 
+        val tvTextoInf = findViewById<TextView>(R.id.tvTextoInf)
+
         btnFinal.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Confirmar finalización")
@@ -124,6 +125,8 @@ class EnviarActivity : AppCompatActivity() {
                 fechaLlegada,
                 fechaCierre,
                 reporteEstus,
+                btnEnviarServidor,
+                tvTextoInf,
             )
         }
     }
@@ -156,9 +159,16 @@ class EnviarActivity : AppCompatActivity() {
         fechaLlegada: String?,
         fechaCierre: String?,
         reporteEstus: String?,
+        btnEnviarServidor: Button,
+        tvTextoInf: TextView
 
         ) {
         val url = "https://model-malamute-real.ngrok-free.app/reportes"
+
+        btnEnviarServidor.text = "Enviando..."
+        btnEnviarServidor.isEnabled = false
+        btnEnviarServidor.alpha = 0.5f
+        tvTextoInf.text = "Enviando Informacion..."
 
         val client = OkHttpClient()
         val gson = Gson()
@@ -229,9 +239,19 @@ class EnviarActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         Log.e("RespuestaServidor", "Código: ${response.code}")
                         statusIcon.setImageResource(R.drawable.ic_check)
+                        btnEnviarServidor.text = "Correcto"
+                        btnEnviarServidor.isEnabled = true
+                        btnEnviarServidor.alpha = 1.0f
+                        tvTextoInf.text = "Enviado Correcto..."
+
                     } else {
                         Log.e("RespuestaServidor", "Body: ${response.body?.string()}")
                         statusIcon.setImageResource(R.drawable.ic_close)
+                        btnEnviarServidor.text = "Intentar"
+                        btnEnviarServidor.isEnabled = true
+                        btnEnviarServidor.alpha = 1.0f
+                        tvTextoInf.text = "Error al Enviado..."
+
                     }
                 }
             } catch (e: Exception) {
@@ -239,6 +259,11 @@ class EnviarActivity : AppCompatActivity() {
                     progressBar.visibility = View.GONE
                     statusIcon.visibility = View.VISIBLE
                     statusIcon.setImageResource(R.drawable.ic_close)
+                    btnEnviarServidor.text = "Error"
+                    btnEnviarServidor.isEnabled = true
+                    btnEnviarServidor.alpha = 1.0f
+                    tvTextoInf.text = "Error Fatal..."
+
                 }
             }
         }.start()

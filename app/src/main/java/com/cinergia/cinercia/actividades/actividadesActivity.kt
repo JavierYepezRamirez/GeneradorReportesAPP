@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,7 @@ import com.cinergia.cinercia.service.AuthService
 
 class actividadesActivity : AppCompatActivity() {
     private val actividadesSeleccionadas = mutableListOf<String>()
+    private lateinit var adapter: ActividadAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +59,23 @@ class actividadesActivity : AppCompatActivity() {
 
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_actividades)
         recyclerView.layoutManager = LinearLayoutManager(this)
+        val searchView = findViewById<SearchView>(R.id.svActividades)
+
+        adapter = ActividadAdapter(emptyList()) { seleccionada ->
+            actividadesSeleccionadas.add(seleccionada)
+        }
+        recyclerView.adapter = adapter
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter(newText ?: "")
+                return true
+            }
+        })
 
         val btnEnvar = findViewById<Button>(R.id.btnGoToEnviar)
 
@@ -101,11 +120,7 @@ class actividadesActivity : AppCompatActivity() {
                 val actividades = AuthService.getActividades()
                 Log.d("ActividadesCargadas", actividades.toString())
                 runOnUiThread {
-                    val adapter = ActividadAdapter(actividades) { seleccionada ->
-                        actividadesSeleccionadas.add(seleccionada)
-                        Log.d("Seleccionadas", actividadesSeleccionadas.toString())
-                    }
-                    recyclerView.adapter = adapter
+                    adapter.updateData(actividades)
                 }
             } catch (e: Exception) {
                 runOnUiThread {
@@ -114,5 +129,6 @@ class actividadesActivity : AppCompatActivity() {
                 }
             }
         }.start()
+
     }
 }

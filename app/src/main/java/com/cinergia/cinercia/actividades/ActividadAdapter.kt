@@ -10,10 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.cinergia.cinercia.R
 
 class ActividadAdapter(
-    private val actividades: List<String>,
+    actividadesOriginal: List<String>,
     private val onItemClick: (String) -> Unit
 ) : RecyclerView.Adapter<ActividadAdapter.ActividadViewHolder>() {
 
+    private val actividadesOriginal = mutableListOf<String>()
+    private val actividadesFiltradas = mutableListOf<String>()
     private val seleccionadas = mutableListOf<String>()
 
     inner class ActividadViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -50,8 +52,32 @@ class ActividadAdapter(
     }
 
     override fun onBindViewHolder(holder: ActividadViewHolder, position: Int) {
-        holder.bind(actividades[position])
+        holder.bind(actividadesFiltradas[position])
     }
 
-    override fun getItemCount(): Int = actividades.size
+    override fun getItemCount(): Int = actividadesFiltradas.size
+
+    fun filter(query: String) {
+        actividadesFiltradas.clear()
+        if (query.isEmpty()) {
+            actividadesFiltradas.addAll(actividadesOriginal)
+        } else {
+            val lowerQuery = query.lowercase()
+            actividadesFiltradas.addAll(
+                actividadesOriginal.filter {
+                    it.lowercase().contains(lowerQuery)
+                }
+            )
+        }
+        notifyDataSetChanged()
+    }
+
+    fun updateData(nuevaLista: List<String>) {
+        actividadesOriginal.clear()
+        actividadesOriginal.addAll(nuevaLista)
+        actividadesFiltradas.clear()
+        actividadesFiltradas.addAll(nuevaLista)
+        notifyDataSetChanged()
+    }
+
 }

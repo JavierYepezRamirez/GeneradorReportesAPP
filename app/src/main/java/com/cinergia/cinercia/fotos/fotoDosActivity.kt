@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.widget.Button
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -73,10 +74,16 @@ class fotoDosActivity : AppCompatActivity() {
             fotosRecibidas1.addAll(uris)
         }
 
-
         val btnTomarFoto = findViewById<Button>(R.id.btnTomarFoto2)
         val btnEnviar = findViewById<Button>(R.id.btnEnviarFotos2)
         val btnSeleccionar = findViewById<Button>(R.id.btnSeleccionarFotos2)
+
+        val tvDescripcion = findViewById<TextView>(R.id.tvDescripcion)
+
+        val Descipciones = listOf("⚠️Importante⚠️", "Sobre como", "Se requieren fotos")
+        val textoConViñetas = Descipciones.joinToString("\n") { "• $it" }
+        tvDescripcion.text = textoConViñetas
+
 
         recyclerView = findViewById(R.id.recyclerFotos)
         adapter = FotoAdapter(fotosTomadas)

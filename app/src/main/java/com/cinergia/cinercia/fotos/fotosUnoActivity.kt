@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -72,6 +73,13 @@ class fotosUnoActivity : AppCompatActivity() {
         val btnTomarFoto = findViewById<Button>(R.id.btnTomarFoto)
         val btnEnviar = findViewById<Button>(R.id.btnEnviarFotos)
         val btnSeleccionar = findViewById<Button>(R.id.btnSeleccionarFotos)
+
+        val tvDescripcion = findViewById<TextView>(R.id.tvDescripcion)
+
+        val Descipciones = listOf("⚠️Importante⚠️", "Sobre como", "Se requieren fotos")
+        val textoConViñetas = Descipciones.joinToString("\n") { "• $it" }
+        tvDescripcion.text = textoConViñetas
+
 
         recyclerView = findViewById(R.id.recyclerFotos)
         adapter = FotoAdapter(fotosTomadas)

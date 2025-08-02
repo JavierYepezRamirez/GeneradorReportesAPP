@@ -61,6 +61,20 @@
         app:layout_constraintTop_toBottomOf="@+id/liner"
         android:background="@drawable/boton_redondeado2"/>
 
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/tvDescripcion"
+        android:textColor="#FF9800"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerFotos"
+        >
+    </TextView>
+
 
     <Button
         android:id="@+id/btnEnviarFotos3"
@@ -69,7 +83,7 @@
         android:text="Enviar Fotos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerFotos"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescripcion"
         android:background="@drawable/boton_redondeado2"
         android:layout_margin="20dp"/>
 
