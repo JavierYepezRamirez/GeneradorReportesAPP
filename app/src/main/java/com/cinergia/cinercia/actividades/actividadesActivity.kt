@@ -31,6 +31,7 @@ class actividadesActivity : AppCompatActivity() {
             insets
         }
         val fotosTotales: ArrayList<Uri>? = intent.getParcelableArrayListExtra("fotos_totales")
+        Log.d("FOTOS", "Fotos recibidas: ${fotosTotales?.size}")
 
         val nodoId = intent.getStringExtra("nodoId")
         val nodoNombre = intent.getStringExtra("nodoNombre")
