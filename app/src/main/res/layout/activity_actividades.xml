@@ -43,9 +43,34 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_actividades"
             android:layout_width="match_parent"
-            android:layout_height="550dp"
+            android:layout_height="450dp"
             android:padding="8dp" />
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/etNuevaActividad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Escribe nueva actividad"
+        android:padding="12dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/boton_redondeado2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"/>
+
+    <Button
+        android:id="@+id/btnAgregarActividad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="8dp"
+        android:background="@drawable/boton_redondeado4"
+        android:text="Agregar Actividad"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etNuevaActividad"/>
 
     <Button
         android:id="@+id/btnGoToEnviar"
@@ -60,7 +85,7 @@
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/btnAgregarActividad" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

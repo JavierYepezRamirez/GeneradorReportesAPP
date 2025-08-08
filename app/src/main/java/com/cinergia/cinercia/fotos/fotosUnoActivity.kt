@@ -70,14 +70,20 @@ class fotosUnoActivity : AppCompatActivity() {
         val fechaLlegada = intent.getStringExtra("fechaLlegada")
         val fechaCierre = intent.getStringExtra("fechaCierre")
 
-        val btnTomarFoto = findViewById<Button>(R.id.btnTomarFoto)
         val btnEnviar = findViewById<Button>(R.id.btnEnviarFotos)
         val btnSeleccionar = findViewById<Button>(R.id.btnSeleccionarFotos)
 
         val tvDescripcion = findViewById<TextView>(R.id.tvDescripcion)
 
-        val Descipciones = listOf("⚠️Importante⚠️", "Sobre como", "Se requieren fotos")
-        val textoConViñetas = Descipciones.joinToString("\n") { "• $it" }
+        val Descripciones = listOf(
+            "Toma una foto del entorno que muestre claramente dónde estás.\n– Si estás en una escuela, asegúrate de que se vea el nombre o la fachada.\n– Si estás en la calle o en el cerro, incluye un punto de referencia visible o señalamiento cercano.",
+            "Toma una o más fotos del equipo o instalación para mostrar:\n– Cómo está ubicado.\n– Qué está dañado, sucio o mal instalado.\n– El estado general del nodo o equipo.",
+            "Si es un nodo público, incluye una foto del exterior donde se vea el mástil o poste, el equipo de telecomunicaciones y el sistema de energía si lo hay.",
+            "Si es un nodo escolar, toma también una foto del interior del gabinete, mostrando las conexiones al módem y cómo está instalada internamente la red o el equipo.",
+            "           "
+        )
+
+        val textoConViñetas = Descripciones.joinToString("\n\n") { "• $it" }
         tvDescripcion.text = textoConViñetas
 
 
@@ -99,14 +105,6 @@ class fotosUnoActivity : AppCompatActivity() {
                 seleccionarFotosGaleria()
             } else {
                 requestStoragePermission()
-            }
-        }
-
-        btnTomarFoto.setOnClickListener {
-            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                tomarFoto()
-            } else {
-                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CAMERA), PERMISSION_REQUEST_CODE)
             }
         }
 

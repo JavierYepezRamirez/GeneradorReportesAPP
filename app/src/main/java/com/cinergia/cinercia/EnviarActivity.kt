@@ -96,8 +96,6 @@ class EnviarActivity : AppCompatActivity() {
             dialog.show()
         }
 
-
-
         btnEnviarServidor.setOnClickListener {
             enviarDatosAlServidor(
                 actividadesSeleccionadas,
@@ -164,7 +162,7 @@ class EnviarActivity : AppCompatActivity() {
         tvTextoInf: TextView
 
         ) {
-        val url = "https://model-malamute-real.ngrok-free.app/reportes"
+        val url = "https://redfish-polite-blatantly.ngrok-free.app/reportes"
 
         btnEnviarServidor.text = "Enviando..."
         btnEnviarServidor.isEnabled = false
@@ -246,8 +244,8 @@ class EnviarActivity : AppCompatActivity() {
                         Log.e("RespuestaServidor", "Código: ${response.code}")
                         statusIcon.setImageResource(R.drawable.ic_check)
                         btnEnviarServidor.text = "Correcto"
-                        btnEnviarServidor.isEnabled = true
-                        btnEnviarServidor.alpha = 1.0f
+                        btnEnviarServidor.isEnabled = false
+                        btnEnviarServidor.alpha = 0.5f
                         tvTextoInf.text = "Enviado Correcto..."
 
                     } else {
@@ -266,8 +264,8 @@ class EnviarActivity : AppCompatActivity() {
                     statusIcon.visibility = View.VISIBLE
                     statusIcon.setImageResource(R.drawable.ic_close)
                     btnEnviarServidor.text = "Error"
-                    btnEnviarServidor.isEnabled = true
-                    btnEnviarServidor.alpha = 1.0f
+                    btnEnviarServidor.isEnabled = false
+                    btnEnviarServidor.alpha = 0.5f
                     tvTextoInf.text = "Error Fatal..."
 
                 }

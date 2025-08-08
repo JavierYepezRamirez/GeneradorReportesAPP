@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -61,6 +62,20 @@ class actividadesActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_actividades)
         recyclerView.layoutManager = LinearLayoutManager(this)
         val searchView = findViewById<SearchView>(R.id.svActividades)
+
+        val etNuevaActividad = findViewById<EditText>(R.id.etNuevaActividad)
+        val btnAgregarActividad = findViewById<Button>(R.id.btnAgregarActividad)
+
+        btnAgregarActividad.setOnClickListener {
+            val nuevaActividad = etNuevaActividad.text.toString().trim()
+            if (nuevaActividad.isNotEmpty()) {
+                actividadesSeleccionadas.add(nuevaActividad)
+                Toast.makeText(this, "Actividad agregada: $nuevaActividad", Toast.LENGTH_SHORT).show()
+                etNuevaActividad.text.clear()
+            } else {
+                Toast.makeText(this, "Escribe una actividad primero", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         adapter = ActividadAdapter(emptyList()) { seleccionada ->
             actividadesSeleccionadas.add(seleccionada)

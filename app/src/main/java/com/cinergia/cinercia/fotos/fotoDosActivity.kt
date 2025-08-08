@@ -73,16 +73,22 @@ class fotoDosActivity : AppCompatActivity() {
         if (uris != null) {
             fotosRecibidas1.addAll(uris)
         }
-
-        val btnTomarFoto = findViewById<Button>(R.id.btnTomarFoto2)
         val btnEnviar = findViewById<Button>(R.id.btnEnviarFotos2)
         val btnSeleccionar = findViewById<Button>(R.id.btnSeleccionarFotos2)
 
         val tvDescripcion = findViewById<TextView>(R.id.tvDescripcion)
 
-        val Descipciones = listOf("⚠️Importante⚠️", "Sobre como", "Se requieren fotos")
-        val textoConViñetas = Descipciones.joinToString("\n") { "• $it" }
+        val Descripciones = listOf(
+            "Toma fotos donde se vea claramente qué actividades estás realizando en el nodo.",
+            "Tú o tu equipo trabajando en el sitio (instalando, limpiando, reparando, configurando).",
+            "Cables reconectados, conectores, antenas ajustadas, equipos abiertos mostrando componentes internos.",
+            "Cambios en proceso, como antes y después de limpiar, ajustes de altura o dirección de antenas, cambio de módem, conexión a paneles solares, etc.",
+            "           "
+        )
+
+        val textoConViñetas = Descripciones.joinToString("\n\n") { "• $it" }
         tvDescripcion.text = textoConViñetas
+
 
 
         recyclerView = findViewById(R.id.recyclerFotos)
@@ -103,14 +109,6 @@ class fotoDosActivity : AppCompatActivity() {
                 seleccionarFotosGaleria()
             } else {
                 requestStoragePermission()
-            }
-        }
-
-        btnTomarFoto.setOnClickListener {
-            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                tomarFoto()
-            } else {
-                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CAMERA), PERMISSION_REQUEST_CODE)
             }
         }
 

@@ -78,16 +78,26 @@ class fotosTresActivity : AppCompatActivity() {
         fotosRecibidas1?.let { todasLasFotos.addAll(it) }
         fotosTomadas2?.let { todasLasFotos.addAll(it) }
 
-        val btnTomarFoto = findViewById<Button>(R.id.btnTomarFoto3)
         val btnEnviar = findViewById<Button>(R.id.btnEnviarFotos3)
         val btnSeleccionar = findViewById<Button>(R.id.btnSeleccionarFotos3)
 
         val tvDescripcion = findViewById<TextView>(R.id.tvDescripcion)
 
-        val Descipciones = listOf("⚠️Importante⚠️", "Sobre como", "Se requieren fotos")
-        val textoConViñetas = Descipciones.joinToString("\n") { "• $it" }
-        tvDescripcion.text = textoConViñetas
+        val Descripciones = listOf(
+            "Toma fotos que muestren claramente que el nodo quedó en buen estado y funcionando correctamente.",
+            "Equipo instalado, limpio y organizado.",
+            "Etiquetado de cables, conexiones ordenadas y mejoras visuales realizadas.",
+            "Dispositivos nuevos o reemplazados como baterías, paneles solares, AP, sensores, etc.",
+            "Sensores de temperatura y humedad instalados, si aplican.",
+            "Luces encendidas, pantallas activas u otros indicadores de funcionamiento.",
+            "Foto del exterior del nodo, mostrando mástil, poste, equipo de telecomunicaciones y energía.",
+            "Foto del interior del gabinete, mostrando el acomodo final, conexiones y módem (si es escolar).",
+            "Foto de prueba de velocidad de internet, si se realizó.",
+            "           "
+        )
 
+        val textoConViñetas = Descripciones.joinToString("\n\n") { "• $it" }
+        tvDescripcion.text = textoConViñetas
 
         recyclerView = findViewById(R.id.recyclerFotos)
         adapter = FotoAdapter(fotosTomadas)
@@ -107,14 +117,6 @@ class fotosTresActivity : AppCompatActivity() {
                 seleccionarFotosGaleria()
             } else {
                 requestStoragePermission()
-            }
-        }
-
-        btnTomarFoto.setOnClickListener {
-            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                tomarFoto()
-            } else {
-                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.CAMERA), PERMISSION_REQUEST_CODE)
             }
         }
 

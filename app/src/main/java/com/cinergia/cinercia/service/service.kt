@@ -16,7 +16,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.IOException
 
 object AuthService {
-    private const val baseUrl = "https://model-malamute-real.ngrok-free.app"
+    private const val baseUrl = "https://redfish-polite-blatantly.ngrok-free.app"
 
     private var token: String? = null
     private var rol: String? = null
